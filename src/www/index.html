@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--
+# -------------------------------------------------------------------------
+# Main page. Query status and provide a toggle-switch for boot/shutdown.
+#
+# Author: Bernhard Bablok
+# License: GPL3
+#
+# Website: https://github.com/bablokb/cp-pi5-webswitch
+#
+# -------------------------------------------------------------------------
+-->
+<html>
+  <head>
+    <title>Pi5 Remote On/Off</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="scripts.js"></script>
+</head>
+<body>
+
+<h2>Pi5 Status</h2>
+
+<label class="switch">
+  <input id="pi5_switch" type="checkbox" onclick="toggle_power()">
+  <span  id="pi5_slider" class="slider"></span>
+</label>
+
+</body>
+    <script  type="text/javascript">
+      window.addEventListener("load", function(event) {
+        get_status();
+      });
+    </script>
+</html> 
