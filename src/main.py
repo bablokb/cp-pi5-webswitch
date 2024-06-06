@@ -31,6 +31,7 @@ except:
     'debug': False,
     'cache': True,
     'ap_mode': False,
+    'desktop': False,                        # no desktop system
     'ap_ssid': 'ap_pi5_switch',              # for ap_mode == True
     'ap_password': '12345678',               # for ap_mode == True
     'ap_hostname': 'pi5switch',              # for ap_mode == True
@@ -99,6 +100,12 @@ class MyServer(Server):
     self._pi5_toggle.value = False
     time.sleep(0.1)
     self._pi5_toggle.value = True
+    if CONFIG["desktop"]:
+      # wait and toggle again to simulate second push
+      time.sleep(1)
+      self._pi5_toggle.value = False
+      time.sleep(0.1)
+      self._pi5_toggle.value = True
     return Response(json.dumps({"rc": True}),
                     content_type="application/json")
 
@@ -134,7 +141,7 @@ class MyServer(Server):
                              protocol="_tcp", port=80)
     pool = socketpool.SocketPool(wifi.radio)
     if CONFIG["ap_mode"]:
-      self._address =  wifi.radio.ipv4_address_ap 
+      self._address =  wifi.radio.ipv4_address_ap
     else:
       self._address = wifi.radio.ipv4_address
     print(f"starting {server.hostname}.local ({self._address})")
