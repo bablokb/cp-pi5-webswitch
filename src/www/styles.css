@@ -25,6 +25,18 @@
   height: 0;
 }
 
+.pi5_on {
+  background-color: lime;
+}
+
+.pi5_changing {
+  background-color: orange;
+}
+
+.pi5_off {
+  background-color: red;
+}
+
 .slider {
   position: absolute;
   cursor: pointer;
@@ -33,7 +45,6 @@
   right: 0;
   bottom: 0;
   border-radius: 34px;
-  background-color: orange;      /* unchecked color, tentative */
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -49,10 +60,6 @@
   border-radius: 50%;
   -webkit-transition: .4s;
   transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: lime;        /* checked color */
 }
 
 input:checked + .slider:before {
