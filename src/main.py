@@ -28,6 +28,8 @@ try:
   from settings import CONFIG
 except:
   CONFIG = {
+    'PIN_TOGGLE': board.GP27,               # connected to Pi5 to toggle state
+    'PIN_3V3':    board.GP26,               # connected to Pi5 3V3
     'debug': False,
     'cache': True,
     'ap_mode': False,
@@ -39,9 +41,6 @@ except:
     'wlan_password': 'my_wlan_password'      # for ap_mode == False
   }
 
-PIN_TOGGLE = board.GP27    # connected to Pi5 to toggle state
-PIN_3V3    = board.GP26    # connected to Pi5 3V3
-
 class MyServer(Server):
 
   # --- constructor   --------------------------------------------------------
@@ -49,9 +48,9 @@ class MyServer(Server):
   def __init__(self):
     """ constructor """
 
-    self._pi5_toggle = DigitalInOut(PIN_TOGGLE)
+    self._pi5_toggle = DigitalInOut(CONFIG['PIN_TOGGLE'])
     self._pi5_toggle.switch_to_output(True,drive_mode=DriveMode.OPEN_DRAIN)
-    self._pi5_3v3    = DigitalInOut(PIN_3V3)
+    self._pi5_3v3    = DigitalInOut(CONFIG['PIN_3V3'])
     self._pi5_3v3.switch_to_input(pull=Pull.DOWN)
 
     super().__init__(debug=CONFIG["debug"])
